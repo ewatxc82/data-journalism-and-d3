@@ -29,5 +29,35 @@ d3.csv("../../data/data.csv", function(err, healthData){
         data.phys_act = +data.phys_act;
     });
 
-    //I think I need to make scalar functions here
+    var yLinearScale = d3.scaleLinear().range([height,0]);
+    var xLinearScale = d3.scaleLinear().range([0,width]);
+
+    //make axis functions
+    var bottomAxis = d3.axisBottom(xLinearScale);
+    var leftAxis = d3.axisLeft(yLinearScale);
+
+    //scale domain
+    var xMin;
+    var xMax;
+    var yMin;
+    var yMax;
+
+    xMin = d3.min(healthData, function(data) {
+        return +data.poverty * 0.95;
+    });
+
+    xMax = d3.max(healthData, function(data){
+        return +data.poverty * 1.05;
+    });
+
+    yMin = d3.min(healthData, function(data){
+        retrun +data.poverty * 0.98;
+    });
+
+    yMax = d3.max(healthData, function(data){
+        return +data.poverty * 1.02;
+    });
+
+    xLinearScale.domain([xMin, xMax]);
+    xLinearScale.domain([yMin, yMax]);
 })
