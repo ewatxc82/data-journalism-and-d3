@@ -7,10 +7,11 @@ var width = svgWidth - margin.left - margin.right;
 var height = svgHeight - margin.top - margin.bottom;
 
 //SVG Wrapper to hold the chart ** rewriting this to something smarter
-var svg = d3.select("body")
-    .append("svg")
-    .attr("width", svgWidth)
-    .attr("height", svgHeight);
+var svg = d3.select("body").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 var chart = svg.append('g')
     .attr("transform", `translate(${margin.left}, ${margin.top})`);
@@ -94,7 +95,7 @@ d3.csv("assets/data/data.csv").then(function(healthData){
     //Make Labels for the graph
     chart.append("text")
         .attr("transform", "rotate(-90)")
-        .attr("y", 0 - margin.left - 5)
+        .attr("y", 0 - margin.left, 35)
         .attr("x", 0 - (height / 1.3))
         .attr("dy", "1em")
         .attr("class", "axisText")
