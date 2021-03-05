@@ -1,18 +1,19 @@
 // @TODO: YOUR CODE HERE!
 // Build Chart
-var svgWidth = 300;
-var svgHeight = 200;
-var margin = {top: 20, right: 40, bottom: 60, left: 50};
+var svgWidth = 1000;
+var svgHeight = 700;
+var margin = {top: 20, right: 50, bottom: 550, left: 50};
 var width = svgWidth - margin.left - margin.right;
 var height = svgHeight - margin.top - margin.bottom;
 
 //SVG Wrapper to hold the chart ** rewriting this to something smarter
-var svg = d3.select("#scatter")
+var svg = d3.select("body")
     .append("svg")
     .attr("width", svgWidth)
     .attr("height", svgHeight);
 
 var chart = svg.append('g')
+    .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
 //pull data from the file provided and put into the chart
 d3.csv("assets/data/data.csv").then(function(healthData){
@@ -22,13 +23,13 @@ d3.csv("assets/data/data.csv").then(function(healthData){
         data.healthcare = +data.healthcare;
     });
 
-    var yLinearScale = d3.scaleLinear()
-        .domain([4, d3.max(healthData, d => d.healthcare)])
-        .range([height, width]);
-
     var xLinearScale = d3.scaleLinear()
         .domain([9, d3.max(healthData, d => d.poverty)])
         .range([0, width]);
+    
+    var yLinearScale = d3.scaleLinear()
+        .domain([4, d3.max(healthData, d => d.healthcare)])
+        .range([height, width]);
 
     //make axis functions
     var bottomAxis = d3.axisBottom(xLinearScale);
@@ -36,6 +37,7 @@ d3.csv("assets/data/data.csv").then(function(healthData){
 
     //add the axis
     chart.append("g")
+        .attr("transform", `translate(0, ${height})`)
         .call(bottomAxis);
     
     chart.append("g")
@@ -47,7 +49,7 @@ d3.csv("assets/data/data.csv").then(function(healthData){
         .append("circle")
         .attr("cx", d => xLinearScale(d.poverty))
         .attr("cy", d => yLinearScale(d.healthcare))
-        .attr("r", 10)
+        .attr("r", 20)
         .attr("fill", "green")
         .attr("opacity", ".5")
         .attr("stroke", "white")
@@ -91,6 +93,7 @@ d3.csv("assets/data/data.csv").then(function(healthData){
 
     //Make Labels for the graph
     chart.append("text")
+        .attr("transform", "rotate(-90)")
         .attr("y", 0 - margin.left - 5)
         .attr("x", 0 - (height / 1.3))
         .attr("dy", "1em")
@@ -98,6 +101,7 @@ d3.csv("assets/data/data.csv").then(function(healthData){
         .text("Absent Healthcare (in %)");
     
     chart.append("text")
+    .attr("transform", `translate(${width / 2.5}, ${height + margin.top + 30})`)
     .attr("class", "axisText")
     .text("Population in Poverty (as %)");
 });
