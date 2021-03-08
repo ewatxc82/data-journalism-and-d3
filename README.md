@@ -11,5 +11,9 @@ The data set analyzed is based on 2014 ACS 1-year estimates from the [US Census 
 * CSS
 * HTML
 
-## Example of Scatter Plot
-(Scatter_Plot.png)
+### Example of Scatter Plot
+* I used D3 techniques to create a scatter plot that represents each stat listed in the dataset with circle elements. The data referenced came from the csv file in the data folder.
+* State abbreviations are added for each circle element.
+* A mouseover effect is provided for each circle element so you can look at the state's specific data.
+
+![healthcare](Scatter_Plot.png)
