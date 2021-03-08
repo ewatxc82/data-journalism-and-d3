@@ -12,4 +12,4 @@ The data set analyzed is based on 2014 ACS 1-year estimates from the [US Census 
 * HTML
 
 ## Example of Scatter Plot
-
+(Scatter_Plot.png)
