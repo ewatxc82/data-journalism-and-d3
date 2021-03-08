@@ -16,4 +16,4 @@ The data set analyzed is based on 2014 ACS 1-year estimates from the [US Census 
 * State abbreviations are added for each circle element.
 * A mouseover effect is provided for each circle element so you can look at the state's specific data.
 
-![healthcare](Scatter_Plot.png)
+![Scatterplot](Scatter_Plot.png)
